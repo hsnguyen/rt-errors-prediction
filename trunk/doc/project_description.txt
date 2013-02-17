@@ -1,0 +1,67 @@
+Estimation of retention time prediction errors in liquid
+chromatography
+---------------------------------------------------------
+
+
+Objective
+---------------------------------------------------------
+
+One of the typical steps of shotgun proteomics assays is liquid
+chromatography, where peptides are separated according to their
+hydrophobicity on a chromatography column. It has been shown that one
+can predict the time that a peptide will spend on the chromatography
+column, the so-called retention time, using the peptide sequence
+alone, and various algorithms that provide such predictions are
+available. Nevertheless, all these algorithms have often large
+predictions errors for certain peptides. Here the goal is to
+investigate different properties of the peptides that might explain
+their large retention time prediction errors, and to build a predictor
+that estimates these errors.
+
+
+
+Materials
+---------------------------------------------------------
+
+A dataset including a list of peptide sequences identified in a
+shotgun proteomics experiment at 1% false discovery rate (FDR). For
+each peptide, the predicted and observed retention times are
+provided. The data can be downloaded at:
+http://www.nada.kth.se/~lukask/course/BB2490/project/rt-pred-errors/data/rt-predictions.txt
+
+
+What to do
+---------------------------------------------------------
+
+- Inspect the retention time prediction errors for the given
+  peptides. Try to find patterns, and formulate hypotheses as to which
+  properties of the peptides lead to larger prediction errors.
+
+- Find an appropriate way to encode some of the properties identified
+  in the previous step.
+
+- Implement/use a method that employs the encoded peptide properties
+  to predict the retention time prediction errors. Here you can use a
+  machine learning-based method such as support vector machines
+  implemented in some freely available package
+  (e.g. http://svmlight.joachims.org/), some statistical technique, or
+  implement your own algorithm.
+
+- Report and discuss the results obtained.
+
+
+
+Tips
+---------------------------------------------------------
+
+- Do not focus too much on the peptides with extreme prediction
+  errors. Remember that the peptides are identified at 1% FDR. This
+  means that 1% of these peptides have an incorrect peptide sequence
+  assigned.
+
+- If you cannot see any patterns regarding the properties of the
+  peptides that get large retention time prediction errors, just be
+  creative! Try to use different descriptors that can be calculated
+  from the peptide sequence, and report the results obtained.
+
+
