@@ -1,0 +1,24 @@
+Loading required package: class
+
+Call:
+svm(formula = error ~ ., data = trainset, kernel = "radial", gamma = bestGamma, 
+    cost = bestC)
+
+
+Parameters:
+   SVM-Type:  eps-regression 
+ SVM-Kernel:  radial 
+       cost:  10 
+      gamma:  0.01 
+    epsilon:  0.1 
+
+
+Number of Support Vectors:  9837
+
+
+
+
+
+Error in plot.xy(xy, type, ...) : invalid plot type
+Calls: plot -> plot -> plot.default -> plot.xy
+Execution halted
