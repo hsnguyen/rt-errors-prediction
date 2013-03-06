@@ -1,6 +1,7 @@
 library(e1071)
 library(protr)
-library(kernlab)
+#library(kernlab)
+library(FSelector)
 ### Error threshold: 10%
 errThres <- 0.1
 
@@ -65,30 +66,81 @@ trainset <- datastd[-testindex,]
 ###################################################
 ### Build predictor with SVM ######################
 ###################################################
+# Feature selector
+weightRF <- random.forest.importance(error~., datastd,importance.type=1)
+subsetRF <- cutoff.k(weightRF,10)
+fRF <- as.simple.formula(subsetRF, "error")
+subsetCFS <- cfs(error~., datastd)
+fCFS <- as.simple.formula(subsetCFS, "error")
+
 
 #tuning
 #tobj <- tune.svm(error~., data=datastd, gamma=10^(-6:-1), cost= 10^(-1:1))
 #bestGamma <- tobj$best.parameters[[1]]
 #bestC <- tobj$best.parameters[[2]]
-
+print("Running SVM with original dataset...")
 bestGamma <- 0.01
 bestC <- 10
+def.pred <- mean(trainset[,1])
+def.rss <- sum((testset[,1]-def.pred)^2)
 
 model <- svm(error~., data=trainset, kernel="radial", gamma=bestGamma, cost=bestC)
 summary(model)
-esvm.pred <- predict(model, testset[,-1])
 
-def.pred <- mean(trainset[,1])
-def.rss <- sum((testset[,1]-def.pred)^2)
+esvm.pred <- predict(model, testset[,-1])
 esvm.rss <- sum((testset[,1]-esvm.pred)^2)
+
 print(paste("Root mean square error:", sqrt(esvm.rss/len)))
 print(paste("Pseudo R2 value for the predictor:",1.0-esvm.rss/def.rss))
+print("=============================================================")
 
 pdf("../results/pred.pdf")
 plot(testset[,1], esvm.pred, main="Prediction by SVM", ylab="prediction",xlab="observation", xlim=c(-2,2), ylim=c(-2,2))
 abline(a=0,b=1,col='red')
 dev.off()
+## After using RF for feature selection
+#tuning
+tobj <- tune.svm(fRF, data=datastd, gamma=10^(-6:-1), cost= 10^(-1:1))
+bestGamma <- tobj$best.parameters[[1]]
+bestC <- tobj$best.parameters[[2]]
+print("Running SVM with RF-reduced dataset...")
+model <- svm(fRF, data=trainset, kernel="radial", gamma=bestGamma, cost=bestC)
+summary(model)
 
+esvm.pred <- predict(model, testset[,-1])
+esvm.rss <- sum((testset[,1]-esvm.pred)^2)
+
+print(paste("Root mean square error:", sqrt(esvm.rss/len)))
+print(paste("Pseudo R2 value for the predictor:",1.0-esvm.rss/def.rss))
+print("=============================================================")
+
+pdf("../results/predRF.pdf")
+plot(testset[,1], esvm.pred, main="Prediction by SVM with RF-reduced data", ylab="prediction",xlab="observation", xlim=c(-2,2), ylim=c(-2,2))
+abline(a=0,b=1,col='red')
+dev.off()
+## After using CSF for feature selection
+#tuning
+tobj <- tune.svm(fCSF, data=datastd, gamma=10^(-6:-1), cost= 10^(-1:1))
+bestGamma <- tobj$best.parameters[[1]]
+bestC <- tobj$best.parameters[[2]]
+print("Running SVM with CSF-reduced dataset...")
+model <- svm(fCSF, data=trainset, kernel="radial", gamma=bestGamma, cost=bestC)
+summary(model)
+
+esvm.pred <- predict(model, testset[,-1])
+esvm.rss <- sum((testset[,1]-esvm.pred)^2)
+
+print(paste("Root mean square error:", sqrt(esvm.rss/len)))
+print(paste("Pseudo R2 value for the predictor:",1.0-esvm.rss/def.rss))
+print("=============================================================")
+
+pdf("../results/predCSF.pdf")
+plot(testset[,1], esvm.pred, main="Prediction by SVM with CSF-reduced data", ylab="prediction",xlab="observation", xlim=c(-2,2), ylim=c(-2,2))
+abline(a=0,b=1,col='red')
+dev.off()
+
+
+###########################################################################
 #model <- ksvm(label~., data=trainset, type="C-bsvc", kernel="rbfdot", kpar=list(sigma=0.1),C=1)
 
 # built-in 10-fold CV estimate of prediction error
