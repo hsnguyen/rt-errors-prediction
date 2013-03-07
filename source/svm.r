@@ -12,7 +12,7 @@ featureExt <- function(aa)
 {
     #Get rid of amino acides at two end
     seq <- strsplit(aa,"\\.")[[1]][2]
-    return(extractAAC(seq))
+    return(extractDC(seq))
 }
 
 hydrSeq <- function(aa)
@@ -66,14 +66,28 @@ trainset <- datastd[-testindex,]
 ###################################################
 ### Build predictor with SVM ######################
 ###################################################
+setwd("../results/2mer")
 # Feature selector
-weightRF <- random.forest.importance(error~., datastd,importance.type=1)
-subsetRF <- cutoff.k(weightRF,10)
-fRF <- as.simple.formula(subsetRF, "error")
+t1 <- Sys.time()
+#weightRF <- random.forest.importance(error~., datastd,importance.type=1)
+weightCS <- chi.squared(error~., datastd)
+subsetCS <- cutoff.k(weightCS,20)
+fCS <- as.simple.formula(subsetCS, "error")
+t2 <- Sys.time()
+
+csdata <- cbind(error,datastd[,subsetCS])
+write.table(csdata,"cs-2mer.txt",row.name=FALSE)
+
+print(paste("Chi squared reduction time:",t2-t1))
+
 subsetCFS <- cfs(error~., datastd)
 fCFS <- as.simple.formula(subsetCFS, "error")
+t3 <- Sys.time()
 
+cfsdata <- cbind(error,datastd[,subsetCFS])
+write.table(cfsdata,"cfs-2mer.txt",row.name=FALSE)
 
+print(paste("CFS reduction time:",t3-t2))
 #tuning
 #tobj <- tune.svm(error~., data=datastd, gamma=10^(-6:-1), cost= 10^(-1:1))
 #bestGamma <- tobj$best.parameters[[1]]
@@ -94,17 +108,17 @@ print(paste("Root mean square error:", sqrt(esvm.rss/len)))
 print(paste("Pseudo R2 value for the predictor:",1.0-esvm.rss/def.rss))
 print("=============================================================")
 
-pdf("../results/pred.pdf")
+pdf("pred.pdf")
 plot(testset[,1], esvm.pred, main="Prediction by SVM", ylab="prediction",xlab="observation", xlim=c(-2,2), ylim=c(-2,2))
 abline(a=0,b=1,col='red')
 dev.off()
 ## After using RF for feature selection
 #tuning
-tobj <- tune.svm(fRF, data=datastd, gamma=10^(-6:-1), cost= 10^(-1:1))
+tobj <- tune.svm(fCS, data=datastd, gamma=10^(-6:-1), cost= 10^(-1:1))
 bestGamma <- tobj$best.parameters[[1]]
 bestC <- tobj$best.parameters[[2]]
-print("Running SVM with RF-reduced dataset...")
-model <- svm(fRF, data=trainset, kernel="radial", gamma=bestGamma, cost=bestC)
+print("Running SVM with CS-reduced dataset...")
+model <- svm(fCS, data=trainset, kernel="radial", gamma=bestGamma, cost=bestC)
 summary(model)
 
 esvm.pred <- predict(model, testset[,-1])
@@ -114,17 +128,17 @@ print(paste("Root mean square error:", sqrt(esvm.rss/len)))
 print(paste("Pseudo R2 value for the predictor:",1.0-esvm.rss/def.rss))
 print("=============================================================")
 
-pdf("../results/predRF.pdf")
-plot(testset[,1], esvm.pred, main="Prediction by SVM with RF-reduced data", ylab="prediction",xlab="observation", xlim=c(-2,2), ylim=c(-2,2))
+pdf("predCS.pdf")
+plot(testset[,1], esvm.pred, main="Prediction by SVM with CS-reduced data", ylab="prediction",xlab="observation", xlim=c(-2,2), ylim=c(-2,2))
 abline(a=0,b=1,col='red')
 dev.off()
-## After using CSF for feature selection
+## After using CFS for feature selection
 #tuning
-tobj <- tune.svm(fCSF, data=datastd, gamma=10^(-6:-1), cost= 10^(-1:1))
+tobj <- tune.svm(fCFS, data=datastd, gamma=10^(-6:-1), cost= 10^(-1:1))
 bestGamma <- tobj$best.parameters[[1]]
 bestC <- tobj$best.parameters[[2]]
-print("Running SVM with CSF-reduced dataset...")
-model <- svm(fCSF, data=trainset, kernel="radial", gamma=bestGamma, cost=bestC)
+print("Running SVM with CFS-reduced dataset...")
+model <- svm(fCFS, data=trainset, kernel="radial", gamma=bestGamma, cost=bestC)
 summary(model)
 
 esvm.pred <- predict(model, testset[,-1])
@@ -134,16 +148,14 @@ print(paste("Root mean square error:", sqrt(esvm.rss/len)))
 print(paste("Pseudo R2 value for the predictor:",1.0-esvm.rss/def.rss))
 print("=============================================================")
 
-pdf("../results/predCSF.pdf")
-plot(testset[,1], esvm.pred, main="Prediction by SVM with CSF-reduced data", ylab="prediction",xlab="observation", xlim=c(-2,2), ylim=c(-2,2))
+pdf("predCFS.pdf")
+plot(testset[,1], esvm.pred, main="Prediction by SVM with CFS-reduced data", ylab="prediction",xlab="observation", xlim=c(-2,2), ylim=c(-2,2))
 abline(a=0,b=1,col='red')
 dev.off()
 
 
 ###########################################################################
 #model <- ksvm(label~., data=trainset, type="C-bsvc", kernel="rbfdot", kpar=list(sigma=0.1),C=1)
-
-# built-in 10-fold CV estimate of prediction error
 #spread <- rep(0,20)
 #for (i in 1:20) {
 #    mysvm <- svm(y ~ x,data,cross=10)
