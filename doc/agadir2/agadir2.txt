@@ -1,0 +1,4 @@
+agadir2 feature
+
+http://agadir.crg.es/ used on all peptides with values of pH=4, temp=303K, Ionic strength=0.001656
+This is a measurement of the helical behavior of peptides.
