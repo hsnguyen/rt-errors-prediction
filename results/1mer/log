@@ -1,0 +1,79 @@
+Loading required package: class
+[1] "Running SVM with original dataset..."
+
+Call:
+svm(formula = error ~ ., data = trainset, kernel = "radial", gamma = bestGamma, 
+    cost = bestC)
+
+
+Parameters:
+   SVM-Type:  eps-regression 
+ SVM-Kernel:  radial 
+       cost:  10 
+      gamma:  0.01 
+    epsilon:  0.1 
+
+
+Number of Support Vectors:  9815
+
+
+
+
+
+[1] "Root mean square error: 0.051060284207722"
+[1] "Pseudo R2 value for the predictor: 0.0527894139679124"
+[1] "============================================================="
+null device 
+          1 
+[1] "Running SVM with RF-reduced dataset..."
+
+Call:
+svm(formula = fRF, data = trainset, kernel = "radial", gamma = bestGamma, 
+    cost = bestC)
+
+
+Parameters:
+   SVM-Type:  eps-regression 
+ SVM-Kernel:  radial 
+       cost:  10 
+      gamma:  0.01 
+    epsilon:  0.1 
+
+
+Number of Support Vectors:  9867
+
+
+
+
+
+[1] "Root mean square error: 0.0520616126587105"
+[1] "Pseudo R2 value for the predictor: 0.0152741906070688"
+[1] "============================================================="
+null device 
+          1 
+[1] "Running SVM with CFS-reduced dataset..."
+
+Call:
+svm(formula = fCFS, data = trainset, kernel = "radial", gamma = bestGamma, 
+    cost = bestC)
+
+
+Parameters:
+   SVM-Type:  eps-regression 
+ SVM-Kernel:  radial 
+       cost:  10 
+      gamma:  0.01 
+    epsilon:  0.1 
+
+
+Number of Support Vectors:  9834
+
+
+
+
+
+[1] "Root mean square error: 0.0520281838844377"
+[1] "Pseudo R2 value for the predictor: 0.0165383699798374"
+[1] "============================================================="
+null device 
+          1 
