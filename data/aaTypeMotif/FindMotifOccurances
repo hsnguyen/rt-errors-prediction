@@ -10,8 +10,8 @@ outFileName = sys.argv[2]
 inFile = open(inFileName,"r")
 outFile = open(outFileName, "w")
 
-#motifList = ["QCQQ", "QQPPH[PQ]QC", "QHHCPQPQC", "CCCQPCCC", "QPH[PQ][PQ]CC[HQ]Q", "CCCCCCCC", "Q[CQ][CQ]Q", "Q[HQ]H[PQ]P[HQ]PQC", "QQ" ] 
-motifList = ["QQQHHQHQ", "Q[HQ][HQ]Q[PQ]PQQ", "QCPPHQQCC", "QCQQ[CH]CC", "CCQCCCCC", "CCCCCCCC", "Q[CQ]Q[CQ]", "Q[CQ][CQ]Q", "[CQ][CQ]CC[CQ]Q", "CCCC[CP][CQ]CC" ] 
+##Motifs found in the peptides in absTypeSeqErr015Min8.fa
+motifList = ["Q[QH][QH]Q[QH][QHP]", "QCCCCCCC", "QHHCPQPQC", "CCCCCCCCC", "QQHQ[PQ]HPQC", "QCQQ[CH]CC", "QQPPH[PQ]QC", "CCCCC[CQ][CQ]CC", "[CQ]CC", "CCCQPCCC" ] 
 
 outFile.write("@relation motifOccurances \n")
 
@@ -19,7 +19,7 @@ outFile.write("@relation motifOccurances \n")
 for motif in motifList: 
     outFile.write("@attribute "+motif+" real\n")
 
-outFile.write("@attribute errorPercent real\n")
+outFile.write("@aaattribute errorPercent real\n")
 
 outFile.write("\n @data \n")
 
