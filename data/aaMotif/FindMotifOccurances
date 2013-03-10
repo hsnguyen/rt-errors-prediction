@@ -10,7 +10,10 @@ outFileName = sys.argv[2]
 inFile = open(inFileName,"r")
 outFile = open(outFileName, "w")
 
-motifList = ["H[IV][VI]VGTPGR", "[QVY]H[IV][PG]GSPF[KQT]", "DNSTMGYM", "[WT]QE[VI]FD[DN][KW]", "IQFVT[HQ]YQH", "WG[PS]W", "IWDTAGQER", "[FHW][DEI][SN][VI]Q[ND][WM]M", "[LW]F[NS]V[CI]YPR", "MQ[HN]W" ] 
+
+##Motifs found in the peptides in absSeqErr015Min8.fa
+motifList = ["GGGG", "IQ[VN]WH[EA]EHR", "H[IV]V[VA]GTPGR", "WC[IS]Y", "[CY]THC[GL]C", "[FL][IF][NH][WF][FV]", "F[EF]MM", "[FI]MHSF", "[MFIW]N[VI][WA]D", "PGTMDSVR" ] 
+
 
 
 outFile.write("@relation motifOccurances \n")
