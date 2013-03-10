@@ -1,0 +1,41 @@
+#! /usr/bin/env python
+import sys
+import re
+
+
+inFileName = sys.argv[1]
+outFileName = sys.argv[2]
+
+
+inFile = open(inFileName,"r")
+outFile = open(outFileName, "w")
+
+motifList = ["H[IV][VI]VGTPGR", "[QVY]H[IV][PG]GSPF[KQT]", "DNSTMGYM", "[WT]QE[VI]FD[DN][KW]", "IQFVT[HQ]YQH", "WG[PS]W", "IWDTAGQER", "[FHW][DEI][SN][VI]Q[ND][WM]M", "[LW]F[NS]V[CI]YPR", "MQ[HN]W" ] 
+
+
+outFile.write("@relation motifOccurances \n")
+
+
+for motif in motifList: 
+    outFile.write("@attribute "+motif+" real\n")
+
+outFile.write("@attribute errorPercent real\n")
+
+outFile.write("\n @data \n")
+
+for ln in inFile.readlines():
+    
+    motifOccurances = ""
+    sequence = ln.split()[0]
+    errorPercent = ln.split()[1]
+    
+    for motif in motifList:
+        result = re.findall(motif, sequence)
+        
+        if (result == None):
+            motifOccurances += "0 "
+        else:
+            motifOccurances += (str(len(result))+" ")
+     
+    outFile.write(motifOccurances+" "+errorPercent+"\n")
+
