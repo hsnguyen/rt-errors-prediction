@@ -1,0 +1,1 @@
+ awk 'function convert(ch){if (index("STYHCNQW",ch)){return "P"}; if (index("DEKR",ch)){return "C"}; if (index("VAMPFIL",ch)){return "H"}; return "Q";} {split($1,PEP,"");for(i=1;i<=length($1);i++){NEWPEP=NEWPEP convert(PEP[i])};$1=NEWPEP;print;NEWPEP="";}' absSeqWithErrorPerc.txt > absSeqWithErrorPerc_converted.txt
