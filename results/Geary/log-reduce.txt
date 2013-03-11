@@ -1,0 +1,6 @@
+Chi-squared reduction time: 2.05631160736084
+CFS reduction time: 1.52431726455688
+Running SVM with CFS-reduced dataset...Root mean square error: 0.0545462081168624
+Pseudo R2 value for the predictor: 0.0162168768751345
+Running SVM with CS-reduced dataset...Root mean square error: 0.0546674828976841
+Pseudo R2 value for the predictor: 0.011837444537355
