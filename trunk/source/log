@@ -1,0 +1,41 @@
+Loading required package: class
+null device 
+          1 
+Loading required package: class
+null device 
+          1 
+Loading required package: class
+null device 
+          1 
+Loading required package: class
+Error in names(CTDC) = paste("prop", rep(1:7, each = 3), ".", names(CTDC),  : 
+  'names' attribute [21] must be the same length as the vector [20]
+Calls: rbind -> featureExt -> do.call -> extractCTDC
+Execution halted
+Loading required package: class
+Error in if (any(co)) { : missing value where TRUE/FALSE needed
+Calls: svm -> svm.formula -> svm.default
+Execution halted
+Loading required package: class
+Error in D[[i]][3, ] = (inds[c(1, floor(length(inds) * c(0.25, 0.5, 0.75)),  : 
+  number of items to replace is not a multiple of replacement length
+Calls: rbind -> featureExt -> do.call -> extractCTDD
+Execution halted
+Loading required package: class
+Warning message:
+In svm.default(x, y, scale = scale, ..., na.action = na.action) :
+  Variable(s) ‘VS511’ and ‘VS531’ and ‘VS541’ and ‘VS151’ and ‘VS251’ and ‘VS351’ and ‘VS451’ and ‘VS551’ and ‘VS651’ and ‘VS751’ and ‘VS561’ and ‘VS571’ and ‘VS512’ and ‘VS532’ and ‘VS542’ and ‘VS552’ and ‘VS562’ and ‘VS572’ and ‘VS513’ and ‘VS533’ and ‘VS543’ and ‘VS153’ and ‘VS253’ and ‘VS353’ and ‘VS453’ and ‘VS553’ and ‘VS653’ and ‘VS753’ and ‘VS563’ and ‘VS573’ and ‘VS514’ and ‘VS534’ and ‘VS544’ and ‘VS154’ and ‘VS254’ and ‘VS354’ and ‘VS454’ and ‘VS554’ and ‘VS654’ and ‘VS754’ and ‘VS564’ and ‘VS574’ and ‘VS515’ and ‘VS535’ and ‘VS545’ and ‘VS155’ and ‘VS255’ and ‘VS355’ and ‘VS455’ and ‘VS555’ and ‘VS655’ and ‘VS755’ and ‘VS565’ and ‘VS575’ and ‘VS516’ and ‘VS536’ and ‘VS546’ and ‘VS156’ and ‘VS256’ and ‘VS356’ and ‘VS456’ and ‘VS556’  [... truncated]
+null device 
+          1 
+Loading required package: class
+null device 
+          1 
+Loading required package: class
+null device 
+          1 
+Loading required package: class
+null device 
+          1 
+Loading required package: class
+null device 
+          1 
