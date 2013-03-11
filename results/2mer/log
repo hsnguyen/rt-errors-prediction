@@ -1,0 +1,93 @@
+Loading required package: class
+[1] "Chi-squared reduction time: 29.1094574928284"
+[1] "CFS reduction time: 6.6323259320524"
+There were 50 or more warnings (use warnings() to see the first 50)
+[1] "Running SVM with original dataset..."
+Warning message:
+In svm.default(x, y, scale = scale, ..., na.action = na.action) :
+  Variable(s) ‘RA’ and ‘KA’ and ‘RR’ and ‘KR’ and ‘RN’ and ‘KN’ and ‘RD’ and ‘KD’ and ‘RC’ and ‘KC’ and ‘RE’ and ‘KE’ and ‘RQ’ and ‘KQ’ and ‘RG’ and ‘KG’ and ‘RH’ and ‘KH’ and ‘RI’ and ‘KI’ and ‘RL’ and ‘KL’ and ‘RK’ and ‘KK’ and ‘RM’ and ‘KM’ and ‘RF’ and ‘KF’ and ‘RS’ and ‘KS’ and ‘RT’ and ‘KT’ and ‘RW’ and ‘KW’ and ‘RY’ and ‘KY’ and ‘RV’ and ‘KV’ constant. Cannot scale data.
+
+Call:
+svm(formula = error ~ ., data = trainset, kernel = "radial", gamma = bestGamma, 
+    cost = bestC)
+
+
+Parameters:
+   SVM-Type:  eps-regression 
+ SVM-Kernel:  radial 
+       cost:  10 
+      gamma:  0.01 
+    epsilon:  0.1 
+
+
+Number of Support Vectors:  2182
+
+
+
+
+
+[1] "Root mean square error: 0.0591454958438596"
+[1] "Pseudo R2 value for the predictor: 0.0531492042796058"
+[1] "============================================================="
+null device 
+          1 
+There were 50 or more warnings (use warnings() to see the first 50)
+[1] "Running SVM with CS-reduced dataset..."
+Warning message:
+In svm.default(x, y, scale = scale, ..., na.action = na.action) :
+  Variable(s) ‘RA’ constant. Cannot scale data.
+
+Call:
+svm(formula = fCS, data = trainset, kernel = "radial", gamma = bestGamma, 
+    cost = bestC)
+
+
+Parameters:
+   SVM-Type:  eps-regression 
+ SVM-Kernel:  radial 
+       cost:  10 
+      gamma:  0.1 
+    epsilon:  0.1 
+
+
+Number of Support Vectors:  2285
+
+
+
+
+
+[1] "Root mean square error: 0.0600840532640959"
+[1] "Pseudo R2 value for the predictor: 0.0228603431819918"
+[1] "============================================================="
+null device 
+          1 
+
+Loading required package: class
+[1] "Running SVM with CFS-reduced dataset..."
+Loading required package: class
+[1] "Running SVM with CFS-reduced dataset..."
+
+Call:
+svm(formula = error ~ ., data = trainset, kernel = "radial", gamma = bestGamma, 
+    cost = bestC)
+
+
+Parameters:
+   SVM-Type:  eps-regression 
+ SVM-Kernel:  radial 
+       cost:  10 
+      gamma:  0.01 
+    epsilon:  0.1 
+
+
+Number of Support Vectors:  10074
+
+
+
+
+
+[1] "Root mean square error: 0.0596978921278644"
+[1] "Pseudo R2 value for the predictor: -0.0284141993555531"
+[1] "============================================================="
+null device 
+          1 
