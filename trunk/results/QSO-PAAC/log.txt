@@ -1,0 +1,22 @@
+Running SVM with original dataset of feature QSO-PAAC
+Call:
+svm(formula = error ~ ., data = trainset, kernel = "radial", gamma = bestGamma, 
+    cost = bestC)
+
+
+Parameters:
+   SVM-Type:  eps-regression 
+ SVM-Kernel:  radial 
+       cost:  10 
+      gamma:  0.01 
+    epsilon:  0.1 
+
+
+Number of Support Vectors:  9949
+
+
+
+
+
+Root mean square error: 0.0582084385998827
+Pseudo R2 value for the predictor: 0.0654889234375264
