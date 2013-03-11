@@ -1,0 +1,73 @@
+#! /usr/bin/env python
+import sys
+import re
+
+
+inFileName = sys.argv[1]
+outFileName = sys.argv[2]
+
+
+inFile = open(inFileName,"r")
+outFile = open(outFileName, "w")
+
+
+regexpPolar = "[STYHCNOW]{2,}"
+regexpHydro = "[AVFPMIL]{2,}"
+regexpCharged = "[DEKR]{2,}"
+motifList = ["MGYM", "MQ[NH]W", "WC[IS]Y", "WHC", "WW", "C[HS]CC", "CTHC", "WG[PS]W", "WN[IM]F", "PPPP" ] 
+
+outFile.write("@relation motifOccurances \n")
+outFile.write("@attribute sequenceLength real\n")
+outFile.write("@attribute NumberOfConsecOccurPolar real\n")
+outFile.write("@attribute NumberOfConsecOccurHydro real\n")
+outFile.write("@attribute NumberOfConsecOccurCharged real\n")
+
+for motif in motifList: 
+    outFile.write("@attribute "+motif+" real\n")
+
+outFile.write("@attribute errorPercent real\n")
+outFile.write("\n @data \n")
+
+for ln in inFile.readlines():
+    
+    feature = ""
+    sequence = ln.split()[0]
+    errorPercent = ln.split()[1]
+    
+    feature += (str(len(sequence))+",")
+    
+    resultPolar =  re.findall(regexpPolar, sequence)
+        
+    if (resultPolar == None):
+        feature += "0,"
+    else:
+        feature += (str(len(resultPolar))+",")
+       
+        
+    resultHydro =  re.findall(regexpHydro, sequence)
+    
+    if (resultHydro == None):
+        feature += "0,"
+    else:
+        feature += (str(len(resultHydro))+",")
+   
+        
+    resultCharged =  re.findall(regexpCharged, sequence)
+     
+    if (resultCharged == None):
+        feature += "0,"
+    else:
+        feature += (str(len(resultCharged))+",")
+        
+        
+    for motif in motifList:
+    
+        result = re.findall(motif, sequence)
+        
+        if (result == None):
+            feature += "0,"
+        else:
+            feature += (str(len(result))+",")
+     
+    outFile.write(feature+errorPercent+"\n")
+

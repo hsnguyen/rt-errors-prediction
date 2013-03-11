@@ -11,15 +11,15 @@ inFile = open(inFileName,"r")
 outFile = open(outFileName, "w")
 
 ##Motifs found in the peptides in absTypeSeqErr015Min8.fa
-motifList = ["Q[QH][QH]Q[QH][QHP]", "QCCCCCCC", "QHHCPQPQC", "CCCCCCCCC", "QQHQ[PQ]HPQC", "QCQQ[CH]CC", "QQPPH[PQ]QC", "CCCCC[CQ][CQ]CC", "[CQ]CC", "CCCQPCCC" ] 
+motifList = ["QQQ", "CCC"] 
 
 outFile.write("@relation motifOccurances \n")
 
 
 for motif in motifList: 
-    outFile.write("@attribute "+motif+" real\n")
+    outFile.write("@attribute type_"+motif+" real\n")
 
-outFile.write("@aaattribute errorPercent real\n")
+outFile.write("@attribute errorPercent real\n")
 
 outFile.write("\n @data \n")
 
@@ -33,9 +33,9 @@ for ln in inFile.readlines():
         result = re.findall(motif, sequence)
         
         if (result == None):
-            motifOccurances += "0 "
+            motifOccurances += "0,"
         else:
-            motifOccurances += (str(len(result))+" ")
+            motifOccurances += (str(len(result))+",")
      
-    outFile.write(motifOccurances+" "+errorPercent+"\n")
+    outFile.write(motifOccurances+errorPercent+"\n")
 
