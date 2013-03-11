@@ -1,14 +1,14 @@
 @relation motifOccurances 
-@attribute Q[QH][QH]Q[QH][QHP] real
-@attribute QCCCCCCC real
-@attribute QHHCPQPQC real
-@attribute CCCCCCCCC real
-@attribute QQHQ[PQ]HPQC real
-@attribute QCQQ[CH]CC real
-@attribute QQPPH[PQ]QC real
-@attribute CCCCC[CQ][CQ]CC real
-@attribute [CQ]CC real
-@attribute CCCQPCCC real
+@attribute Type_Q[QH][QH]Q[QH][QHP] real
+@attribute Type_QCCCCCCC real
+@attribute Type_QHHCPQPQC real
+@attribute Type_CCCCCCCCC real
+@attribute Type_QQHQ[PQ]HPQC real
+@attribute Type_QCQQ[CH]CC real
+@attribute Type_QQPPH[PQ]QC real
+@attribute Type_CCCCC[CQ][CQ]CC real
+@attribute Type_[CQ]CC real
+@attribute Type_CCCQPCCC real
 @aaattribute errorPercent real
 
  @data 
