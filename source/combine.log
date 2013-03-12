@@ -1,0 +1,40 @@
+Loading required package: class
+Warning message:
+In dir.create(cdir) : 'SOCN-PAAC' already exists
+null device 
+          1 
+Loading required package: class
+null device 
+          1 
+Loading required package: class
+null device 
+          1 
+Loading required package: class
+Warning message:
+In dir.create(cdir) : 'QSO-APAAC' already exists
+null device 
+          1 
+Loading required package: class
+Error: object 'code' not found
+Execution halted
+Loading required package: class
+Error: object 'code' not found
+Execution halted
+Loading required package: class
+Error: object 'code' not found
+Execution halted
+Loading required package: class
+Error: object 'code' not found
+Execution halted
+Loading required package: class
+null device 
+          1 
+Loading required package: class
+null device 
+          1 
+Loading required package: class
+null device 
+          1 
+Loading required package: class
+null device 
+          1 

@@ -1,0 +1,5 @@
+Loading required package: class
+Loading required package: methods
+Warning message:
+In svm.default(x, y, scale = scale, ..., na.action = na.action) :
+  Variable(s) ‘VS511’ constant. Cannot scale data.

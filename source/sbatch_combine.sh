@@ -18,4 +18,7 @@ cd /home/nguyenh/rt-errors-prediction/source/
 # Then list the commands that you would like to run. 
 # If you'd like to add more jobs, enter them on the following lines. 
 # To help you out, the first command of today's lab is provided:
-time R --slave -f extr.r >> ../results/2mer/log 2>&1
+./combine.r 7 8 10 >> combine.log 2>&1
+./combine.r 7 8 11 >> combine.log 2>&1
+./combine.r 7 9 10 >> combine.log 2>&1
+./combine.r 7 9 11 >> combine.log 2>&1

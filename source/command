@@ -1,0 +1,1 @@
+sbatch -A g2012230 -t 50:00:00 -p node -n 8 -o time.out --mail-type=ALL --mail-user=hsnguyen@kth.se sbatch_svm.sh
